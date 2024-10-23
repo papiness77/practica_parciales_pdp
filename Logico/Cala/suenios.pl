@@ -98,3 +98,4 @@ puedeAlegrar(Personaje, Persona):-
     suenia(Persona, _),
     tienenQuimica(Personaje, Persona),
     personajeOAmigosSanos(Personaje).
+
