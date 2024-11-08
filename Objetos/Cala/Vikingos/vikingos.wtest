@@ -1,0 +1,35 @@
+import vikingos.*
+
+const soldado = new Soldado(kills = 1, casta = thrall)
+const granjero = new Granjero(cantidadHijos = 3, cantidadHectareas = 2, casta = jarl)
+const expedicion = new Expedicion()
+
+test "1.a - Subir soldado a expedición que no puede" {
+  assert.throwsException{ expedicion.subir(soldado) }
+}
+
+test "1.b - Subir granjero a expedición que no puede" {
+  assert.throwsException{ expedicion.subir(granjero) }
+}
+
+
+const buenosAires = new Capital(factorRiqueza = -0.2, defensores = 5)
+
+const aldeaMalarda = new Aldea(cantidadCrucifijos = 1)
+
+const aldeaBuena = new AldeaAmurallada(minimoVikingos = 2, cantidadCrucifijos = 20)
+test "2.a - Expedicion que vale la pena" {
+  const expedicionBuena = new Expedicion(objetivos = [aldeaBuena], comitiva = [soldado, granjero])
+  assert.that(expedicionBuena.valeLaPena())
+}
+
+test "2.b - Expedicion que no vale la pena" {
+  const expedicionMala = new Expedicion(comitiva = [soldado, granjero], objetivos = [buenosAires, aldeaMalarda])
+  assert.notThat(expedicionMala.valeLaPena())
+}
+
+test "5 - Ragnar escala socialmente de Karl a Thrall" {
+  const ragnar = new Soldado(casta = karl, kills = 2)
+  ragnar.ascender()
+  assert.equals(thrall, ragnar.casta())
+}
